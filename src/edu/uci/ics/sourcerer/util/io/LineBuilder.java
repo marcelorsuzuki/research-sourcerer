@@ -72,6 +72,6 @@ public final class LineBuilder {
   }
   
   public static Scanner getScanner(String line) {
-    return new Scanner(line).useDelimiter(" ");
+    return (new Scanner(line)).useDelimiter(" ");
   }
 }
