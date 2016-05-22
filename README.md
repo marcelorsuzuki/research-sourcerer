@@ -1,1 +1,1 @@
-# research-sourcerer
+# SMIS - Search Methods in Sourcerer
