@@ -21,13 +21,11 @@ import static edu.uci.ics.sourcerer.util.io.logging.Logging.logger;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -150,13 +148,13 @@ public class SliceImpl implements Slice {
 		try (ZipOutputStream zos = new ZipOutputStream(bos)) {
 			// For each file
 			for (SlicedFileImpl file : files.values()) {
-				FelipeDebug.debug("[File]:"+file.getFileID());
+				SlicerDebug.debug("[File]:"+file.getFileID());
 				for (SlicedEntityImpl e : file.getEntities()){
-					FelipeDebug.debug("[Entity]"+e.getEntityType().name()+":" + e.getFqn());
+					SlicerDebug.debug("[Entity]"+e.getEntityType().name()+":" + e.getFqn());
 				}
 				// The first entry should always be a declared type
 				String fqn = file.getEntities().iterator().next().getFqn();
-				FelipeDebug.debug("[File]:"+fqn);
+				SlicerDebug.debug("[File]:"+fqn);
 
 				// Get the file contents
 				char[] contents = new String(getContents(file.getFileID())).toCharArray();
@@ -196,12 +194,12 @@ public class SliceImpl implements Slice {
 							builder.append(mod).append(' ');
 							modf+=mod+" ";
 						}
-						FelipeDebug.debug("[Field]:"+modf+" "+entity);
+						SlicerDebug.debug("[Field]:"+modf+" "+entity);
 						//builder.append((Modifiers.toString(entity.getModifiers().getValue())));
 						//builder.append("Object ");//type
 						
 						String select = "select fqn from entities left join relations on (rhs_eid=entity_id) where relation_type='HOLDS' AND lhs_eid="+entity.getEntityID();
-						FelipeDebug.debug(select+";");
+						SlicerDebug.debug(select+";");
 						SlicerDatabaseAccessor dba = SlicerDatabaseAccessor.create();
 						String typeFqn=dba.manualQuery(select);
 						if(typeFqn==null || typeFqn==""){

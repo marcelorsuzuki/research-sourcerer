@@ -1,6 +1,6 @@
 package edu.uci.ics.sourcerer.services.slicer.internal;
 
-public class FelipeDebug {
+public class SlicerDebug {
 
 	private static boolean print = true;
 	

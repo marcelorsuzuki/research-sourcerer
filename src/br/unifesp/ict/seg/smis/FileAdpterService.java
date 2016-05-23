@@ -13,7 +13,6 @@ import edu.uci.ics.sourcerer.utils.db.DatabaseConnectionFactory;
 public class FileAdpterService {
 
 	public FileAdpterService() throws FileNotFoundException {
-		System.out.println(System.getProperty("user.dir"));
 		InputStream is = new FileInputStream("smis.properties");
 		ArgumentManager.PROPERTIES_STREAM.setValue(is);
 		JavaRepositoryFactory.INPUT_REPO.permit();

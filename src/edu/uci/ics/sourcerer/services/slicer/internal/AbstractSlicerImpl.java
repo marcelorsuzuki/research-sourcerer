@@ -64,7 +64,7 @@ public abstract class AbstractSlicerImpl implements Slicer {
 			Class.forName(className);
 			return true;
 		} catch (ClassNotFoundException e1) {
-			FelipeDebug.debug(e1.getMessage());
+			SlicerDebug.debug(e1.getMessage());
 			return false;
 		}    	
     }
@@ -80,7 +80,7 @@ public abstract class AbstractSlicerImpl implements Slicer {
             case METHOD:
             case CONSTRUCTOR:
               boolean willLookRecursion = !isJREEntity(entity) || lookRecursion;
-              FelipeDebug.debug("["+entity.getEntityType()+"]:"+entity.getFqn()+ " ("+entity.getEntityID()+")[willAdd="+willLookRecursion+"]");
+              SlicerDebug.debug("["+entity.getEntityType()+"]:"+entity.getFqn()+ " ("+entity.getEntityID()+")[willAdd="+willLookRecursion+"]");
         	  addContainingEntity(entity.getEntityID());
         	  addUsedTypes(entity.getEntityID());
         	  //addInstanciedTypes(entity.getEntityID());
