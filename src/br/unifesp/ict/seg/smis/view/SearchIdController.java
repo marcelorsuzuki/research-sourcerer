@@ -1,7 +1,5 @@
 package br.unifesp.ict.seg.smis.view;
 
-import java.io.FileNotFoundException;
-
 import br.unifesp.ict.seg.smis.FileAdpterService;
 import br.unifesp.ict.seg.smis.SliceService;
 import javafx.application.Platform;
@@ -13,31 +11,21 @@ import javafx.scene.control.TextField;
 
 public class SearchIdController {
 	
+	
 	@FXML private TextField txtMethodIdFile;
 	@FXML private TextField txtFileId;
 	@FXML private TextField txtMethodIdSlice;
 	
 	@FXML public void bttActionFindMethodFile(ActionEvent event) {
 		int id = Integer.parseInt(txtMethodIdFile.getText());
-		try {
-			FileAdpterService service = new FileAdpterService();
-			service.findMethod(id);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		
-		
+		FileAdpterService service = new FileAdpterService();
+		service.findMethod(id);
 	}
 
 	@FXML public void bttActionFindFile(ActionEvent event) { 
 		int id = Integer.parseInt(txtFileId.getText());
-		FileAdpterService service;
-		try {
-			service = new FileAdpterService();
-			service.findFile(id);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		FileAdpterService service = new FileAdpterService();
+		service.findFile(id);
 		
 	}
 
@@ -50,13 +38,8 @@ public class SearchIdController {
 		
 		int entityID = Integer.parseInt(txtMethodIdSlice.getText());
 		
-		SliceService service;
-		try {
-			service = new SliceService();
-			service.findMethod(entityID);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		SliceService service = new SliceService();
+		service.findMethod(entityID);
 		
 	
 	}
