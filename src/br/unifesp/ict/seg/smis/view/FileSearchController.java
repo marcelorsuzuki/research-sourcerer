@@ -41,7 +41,7 @@ public class FileSearchController {
 	@FXML public void bttActionFindFileId(ActionEvent event) {
 		int id = Integer.parseInt(txtFileId.getText());
 		FileAdpterService service = new FileAdpterService();
-		service.findMethod(id);
+		service.findFile(id);
 	}
 
 
