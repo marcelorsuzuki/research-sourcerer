@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 /**
  * 
@@ -38,13 +39,16 @@ public class StageGeneric extends Stage {
 	 * configura a Scene, com a largura e altura passada, e mostra a janela.
 	 * 
 	 */
-	public void init() {
+	public void init(Window owner) {
 		try {
 			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource(this.filename));
 			Scene scene = new Scene(root, this.width, this.height);
+			
+			this.centerOnScreen();
 			this.setScene(scene);
 			this.setTitle(this.title);
-			this.show();
+			this.initOwner(owner);
+			this.showAndWait();
 			
 		} 
 		catch (Exception e) {

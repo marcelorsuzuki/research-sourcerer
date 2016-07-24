@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
  * @author Marcelo Suzuki
  *
  */
-public class MethodSearchController {
+public class MethodSliceController {
 	
 	
 	@FXML private TextField txtMethodId;
@@ -58,7 +58,6 @@ public class MethodSearchController {
 	 */
 	@FXML public void bttActionClose(ActionEvent event) { 
 		((Button) event.getSource()).getScene().getWindow().hide();
-		Platform.exit();
 	}
 
 

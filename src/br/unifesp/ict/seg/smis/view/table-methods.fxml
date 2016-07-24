@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="305.0" prefWidth="366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+			fx:controller="br.unifesp.ict.seg.smis.view.TableMethodsController">
+	<children>
+
+		<TitledPane animated="false" blendMode="SRC_ATOP" collapsible="false" prefHeight="211.0" prefWidth="366.0" text="Method's table"
+			AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<content>
+				<GridPane alignment="CENTER" prefHeight="212.0" prefWidth="364.0">
+					<children>
+						<Label text="Number of methods"/>
+						<Label text="String methods" GridPane.rowIndex="1" />
+						<Label text="Float methods" GridPane.rowIndex="2" />
+						<Label text="Double methdos" GridPane.rowIndex="3" />
+						<Label text="Integer methods" GridPane.rowIndex="4" />
+						<Label text="Long methods" GridPane.rowIndex="5" />
+						<Label text="Boolean methods" GridPane.rowIndex="6" />
+
+						<Label fx:id="labelNumberMethods" text="0" GridPane.columnIndex="1">
+							<GridPane.margin>
+								<Insets left="10.0" />
+							</GridPane.margin>
+						</Label>
+						<Label fx:id="stringMethods" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+							<GridPane.margin>
+								<Insets left="10.0" />
+							</GridPane.margin>
+						</Label>
+						<Label fx:id="floatMethods" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+							<GridPane.margin>
+								<Insets left="10.0" />
+							</GridPane.margin>
+						</Label>
+						<Label fx:id="doubleMethods" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+							<GridPane.margin>
+								<Insets left="10.0" />
+							</GridPane.margin>
+						</Label>
+						<Label fx:id="integerMethods" text="0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+							<GridPane.margin>
+								<Insets left="10.0" />
+							</GridPane.margin>
+						</Label>
+						<Label fx:id="longMethods" text="0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+							<GridPane.margin>
+								<Insets left="10.0" />
+							</GridPane.margin>
+						</Label>
+						<Label fx:id="booleanMethods" text="0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+							<GridPane.margin>
+								<Insets left="10.0" />
+							</GridPane.margin>
+						</Label>
+						
+						<Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Recreate Table" 
+								onAction="#bttActionRecreateTable" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+							<GridPane.margin>
+								<Insets left="5.0" right="5.0" />
+							</GridPane.margin>
+						</Button>
+						<Button id="bttCloseCmd" alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" 
+								onAction="#bttActionClose" text="Close" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+							<opaqueInsets>
+								<Insets />
+							</opaqueInsets>
+							<GridPane.margin>
+								<Insets left="5.0" right="5.0" />
+							</GridPane.margin>
+						</Button>
+						
+					</children>
+					<columnConstraints>
+						<ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="841.0" minWidth="10.0" prefWidth="172.0" />
+						<ColumnConstraints hgrow="SOMETIMES" maxWidth="772.0" minWidth="10.0" prefWidth="172.0" />
+					</columnConstraints>
+					<rowConstraints>
+						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+					</rowConstraints>
+				</GridPane>
+			</content>
+		</TitledPane>
+	</children>
+</AnchorPane>

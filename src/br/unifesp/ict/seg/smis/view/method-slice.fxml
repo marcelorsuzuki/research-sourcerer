@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="211.0" prefWidth="366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="br.unifesp.ict.seg.smis.view.MethodSearchController">
+	fx:controller="br.unifesp.ict.seg.smis.view.MethodSliceController">
 	<children>
 		<VBox alignment="TOP_CENTER" layoutX="381.0" layoutY="155.0" prefHeight="271.0" prefWidth="366.0" AnchorPane.bottomAnchor="0.0"
 			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
