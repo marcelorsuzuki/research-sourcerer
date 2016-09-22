@@ -18,8 +18,7 @@ import javafx.scene.control.ButtonType;
  */
 public class MainController {
 	
-	@FXML
-	private MethodSliceController searchId;
+	@FXML private MethodSliceController searchId;
 	
 	
 	/**
@@ -31,6 +30,13 @@ public class MainController {
 		StageGeneric stage = new StageGeneric("method-slice.fxml", 600, 200, "Slice Method");
 		Button button = (Button) event.getTarget();
     	stage.init(button.getScene().getWindow());
+	}
+	
+	@FXML public void bttActionCreateJars(ActionEvent event) {
+		StageGeneric stage = new StageGeneric("ids-file.fxml", 600, 150, "Select file with id's...");
+		Button button = (Button) event.getTarget();
+    	stage.init(button.getScene().getWindow());
+
 	}
 	
 	
@@ -50,6 +56,7 @@ public class MainController {
 		Button button = (Button) event.getTarget();
     	stage.init(button.getScene().getWindow());
 	}
+	
 	
 	/**
 	 * Fecha o progrma

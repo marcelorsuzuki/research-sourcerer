@@ -19,7 +19,6 @@ package edu.uci.ics.sourcerer.services.slicer.internal;
 
 import static edu.uci.ics.sourcerer.util.io.logging.Logging.logger;
 
-import java.lang.reflect.Modifier;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Set;

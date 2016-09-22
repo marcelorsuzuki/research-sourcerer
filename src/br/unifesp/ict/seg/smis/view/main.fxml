@@ -17,8 +17,8 @@
 								<Insets bottom="10.0" top="10.0" />
 							</VBox.margin>
 						</Button>
-						<Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Search File"
-								onAction="#bttActionSearchFile">
+						<Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Create Jar's"
+								onAction="#bttActionCreateJars" visible="true">
 							<VBox.margin>
 								<Insets bottom="10.0" top="10.0" />
 							</VBox.margin>
@@ -30,6 +30,12 @@
 							</VBox.margin>
 						</Button>
 						<Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Config">
+							<VBox.margin>
+								<Insets bottom="10.0" top="10.0" />
+							</VBox.margin>
+						</Button>
+						<Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Search File"
+								onAction="#bttActionSearchFile" visible="false">
 							<VBox.margin>
 								<Insets bottom="10.0" top="10.0" />
 							</VBox.margin>

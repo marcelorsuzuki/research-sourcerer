@@ -1,7 +1,6 @@
 package br.unifesp.ict.seg.smis.view;
 
 import br.unifesp.ict.seg.smis.SliceService;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
