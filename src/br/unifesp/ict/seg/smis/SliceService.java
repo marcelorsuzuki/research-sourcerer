@@ -15,7 +15,16 @@ import edu.uci.ics.sourcerer.services.slicer.model.Slicer;
 
 public class SliceService {
 	
-	public void findMethod(int entityID) {
+	private String zipFile = null;
+	
+	public SliceService() {}
+	
+	public SliceService(String zipFile) {
+		this.zipFile = zipFile;
+	}
+	
+	
+	public boolean findMethod(int entityID) {
 		long start = System.currentTimeMillis();
 		
 		Slicer slicer = SlicerFactory.createSlicer();
@@ -27,17 +36,23 @@ public class SliceService {
 		long end = System.currentTimeMillis();
 		
 		System.out.println("total of " + (end - start) + " ms");
-		String filename = JOptionPane.showInputDialog("Type zip's fqn", System.getProperty("user.home") + File.separator + "slicertest.zip");
-		JOptionPane.showMessageDialog(null, result.getInternalEntities().toString().replace(",", "\n").trim());
+		
+		if (zipFile == null) {
+			zipFile = JOptionPane.showInputDialog("Type zip's fqn", System.getProperty("user.home") + File.separator + "slicertest.zip");
+			JOptionPane.showMessageDialog(null, result.getInternalEntities().toString().replace(",", "\n").trim());
+		}
 		FileOutputStream fos;
 		
 		try {
-			fos = new FileOutputStream(new File(filename));
+			fos = new FileOutputStream(new File(zipFile));
 			fos.write(input);
 			fos.close();
+			return true;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	
+		
+		return false;
 	}
 
 

@@ -14,36 +14,36 @@
 						<Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Slice Method" 
 								onAction="#bttActionSliceMethod">
 							<VBox.margin>
-								<Insets bottom="10.0" top="10.0" />
+								<Insets bottom="5.0" top="5.0" />
 							</VBox.margin>
 						</Button>
 						<Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Create Jar's"
 								onAction="#bttActionCreateJars" visible="true">
 							<VBox.margin>
-								<Insets bottom="10.0" top="10.0" />
+								<Insets bottom="5.0" top="5.0" />
 							</VBox.margin>
 						</Button>
 						<Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Table Methods"
 								onAction="#bttActionTableMethods">
 							<VBox.margin>
-								<Insets bottom="10.0" top="10.0" />
+								<Insets bottom="5.0" top="5.0" />
 							</VBox.margin>
 						</Button>
 						<Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Config">
 							<VBox.margin>
-								<Insets bottom="10.0" top="10.0" />
+								<Insets bottom="5.0" top="5.0" />
 							</VBox.margin>
 						</Button>
 						<Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Search File"
 								onAction="#bttActionSearchFile" visible="false">
 							<VBox.margin>
-								<Insets bottom="10.0" top="10.0" />
+								<Insets bottom="5.0" top="5.0" />
 							</VBox.margin>
 						</Button>
 						<Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Quit"
 								onAction="#bttActionQuit">
 							<VBox.margin>
-								<Insets bottom="10.0" top="100.0" />
+								<Insets bottom="5.0" top="5.0" />
 							</VBox.margin>
 						</Button>
 					</children>

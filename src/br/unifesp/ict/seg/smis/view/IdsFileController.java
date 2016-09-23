@@ -1,6 +1,7 @@
 package br.unifesp.ict.seg.smis.view;
 
 import java.io.File;
+import java.io.IOException;
 
 import br.unifesp.ict.seg.smis.process.MethodProcess;
 import javafx.event.ActionEvent;
@@ -19,7 +20,12 @@ public class IdsFileController {
 
 	@FXML public void bttCompile(ActionEvent event) {
 		MethodProcess mp = new MethodProcess(txtFileIds.getText());
-		mp.compileAll();
+		try {
+			mp.compileAll();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@FXML public void bttActionClose(ActionEvent event) {
@@ -38,5 +44,6 @@ public class IdsFileController {
 		File file = fc.showOpenDialog(window);
 		txtFileIds.setText(file.getAbsolutePath());
 	}
+	
 
 }

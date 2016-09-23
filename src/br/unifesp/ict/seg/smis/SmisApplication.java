@@ -34,8 +34,10 @@ public class SmisApplication extends Application {
 	public void start(Stage primaryStage) {
 
 		//Tamanho da janela maximixada
-		double width = Screen.getPrimary().getVisualBounds().getWidth(); 
-		double height = Screen.getPrimary().getVisualBounds().getHeight(); 
+//		double width = Screen.getPrimary().getVisualBounds().getWidth(); 
+//		double height = Screen.getPrimary().getVisualBounds().getHeight(); 
+		double width = 700;
+		double height = 300;
 		
 		try {
 			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("view/main.fxml"));
