@@ -1,4 +1,4 @@
-package br.unifesp.ict.seg.smis;
+package br.unifesp.ict.seg.smis.application;
 
 import edu.uci.ics.sourcerer.services.file.adapter.FileAdapter;
 import edu.uci.ics.sourcerer.services.file.adapter.FileAdapter.Result;

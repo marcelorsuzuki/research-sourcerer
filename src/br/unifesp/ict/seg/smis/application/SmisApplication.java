@@ -1,5 +1,5 @@
 
-package br.unifesp.ict.seg.smis;
+package br.unifesp.ict.seg.smis.application;
 	
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -40,10 +40,10 @@ public class SmisApplication extends Application {
 		double height = 300;
 		
 		try {
-			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("view/main.fxml"));
+			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("../view/main.fxml"));
 			Scene scene = new Scene(root, width, height);
 			primaryStage.setScene(scene);
-			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("Info_i_blue.png")));
+			//primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("Info_i_blue.png")));
 			primaryStage.setTitle(" SMIS 1.0");
 			primaryStage.show();
 

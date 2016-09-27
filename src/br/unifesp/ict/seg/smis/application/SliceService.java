@@ -1,4 +1,4 @@
-package br.unifesp.ict.seg.smis;
+package br.unifesp.ict.seg.smis.application;
 
 import java.io.File;
 import java.io.FileOutputStream;
