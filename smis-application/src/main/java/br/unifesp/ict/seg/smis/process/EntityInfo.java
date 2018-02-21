@@ -9,18 +9,16 @@ public class EntityInfo {
 	private String projectName;
 	private String className;
 	private String methodName;
-	private List<String> paramList;
+	private String params;
+	private String projectType;
+	private Integer entityId;
+	
 	private String returnType;
 	
 	public void fillClassAndMethod(String fqn) {
 		int pos = fqn.lastIndexOf(".");
 		className = fqn.substring(0, pos);
 		methodName = fqn.substring(pos + 1);
-	}
-	
-	public void splitParams(String params){
-		params = params.replace("(", "").replace(")", "");
-		paramList =  new ArrayList<>(Arrays.asList(params.split(",")));
 	}
 	
 	public String getClassName() {
@@ -32,6 +30,8 @@ public class EntityInfo {
 	}
 	
 	public List<String> getParamList() {
+		String aux = params.replace("(", "").replace(")", "");
+		List<String> paramList =  new ArrayList<>(Arrays.asList(aux.split(",")));
 		return paramList;
 	}
 	
@@ -49,4 +49,27 @@ public class EntityInfo {
 		return returnType;
 	}
 
+	public String getParams() {
+		return params;
+	}
+	
+	public void setParams(String params) {
+		this.params = params;
+	}
+
+	public String getProjectType() {
+		return projectType;
+	}
+	
+	public void setProjectType(String projectType) {
+		this.projectType = projectType;
+	}
+	
+	public Integer getEntityId() {
+		return entityId;
+	}
+	
+	public void setEntityId(Integer entityId) {
+		this.entityId = entityId;
+	}
 }

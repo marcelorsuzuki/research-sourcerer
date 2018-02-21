@@ -88,7 +88,8 @@ public class SliceImpl implements Slice {
 				type == Entity.INITIALIZER ||
 				type == Entity.METHOD || 
 				//false;
-				type == Entity.CONSTRUCTOR;
+				type == Entity.CONSTRUCTOR ||
+				type == Entity.LOCAL_VARIABLE;
 	}
 
 	ModeledTypeImpl getType(Integer entityID) {
@@ -202,6 +203,7 @@ public class SliceImpl implements Slice {
 						SlicerDebug.debug(select+";");
 						SlicerDatabaseAccessor dba = SlicerDatabaseAccessor.create();
 						String typeFqn = dba.manualQuery(select);
+						dba.close();
 						if(typeFqn==null || typeFqn==""){
 							typeFqn=".Object";
 						}
@@ -218,7 +220,6 @@ public class SliceImpl implements Slice {
 						}  else {
 							builder.append(entity.getFqn().substring(entity.getFqn().lastIndexOf(".")+1)+";\n");//name
 						}
-						dba.close();
 												
 					} else if (entity.getEntityType().isDeclaredType()) {
 						// Add the modifiers

@@ -176,6 +176,7 @@ class SlicerDatabaseAccessor implements Closeable {
   }
   
   public String manualQuery(String query){
+	  
 	  if(conn.open()){
 		  String firstRow = conn.getExecutor().executeSingle(query);
 		  conn.close();

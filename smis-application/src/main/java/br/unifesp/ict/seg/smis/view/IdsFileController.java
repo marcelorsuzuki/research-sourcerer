@@ -3,7 +3,7 @@ package br.unifesp.ict.seg.smis.view;
 import java.io.File;
 import java.io.IOException;
 
-import br.unifesp.ict.seg.smis.process.MethodProcess;
+import br.unifesp.ict.seg.smis.process.MethodsProcess;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,7 +19,7 @@ public class IdsFileController {
 	@FXML private Label lblNumberFiles;
 
 	@FXML public void bttCompile(ActionEvent event) {
-		MethodProcess mp = new MethodProcess(txtFileIds.getText());
+		MethodsProcess mp = new MethodsProcess(txtFileIds.getText());
 		try {
 			mp.compileAll();
 		} catch (IOException e) {

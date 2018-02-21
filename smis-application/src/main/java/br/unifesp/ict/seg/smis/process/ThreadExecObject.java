@@ -3,7 +3,7 @@ package br.unifesp.ict.seg.smis.process;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class ThreadExecStatic implements Runnable {
+public class ThreadExecObject implements Runnable {
 	
 	private Class<?> myClass;
 	private Object[] values;
@@ -12,16 +12,17 @@ public class ThreadExecStatic implements Runnable {
 	private volatile Object obj = null;
 	
 	
-	public ThreadExecStatic(Class<?> myClass, Object[] values, Method method) {
+	public ThreadExecObject(Class<?> myClass, Object[] values, Method method) {
 		this.myClass = myClass;
 		this.values = values;
 		this.method = method;
 	}
 	
 	public void run() {
-    	try {
-			obj =  method.invoke(myClass, values);
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+		try {
+    		Object instance = myClass.newInstance();
+			obj =  method.invoke(instance, values);
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | InstantiationException e) {
 			obj = "Exception: (Thread) " + e.getCause();
 		}
     }

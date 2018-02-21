@@ -25,16 +25,17 @@ public class InterfaceMetricsDao {
 	 * 
 	 * @return Entity Id
 	 */
-	public Integer retriveEntityId(String interfaceMetricId) {
+	public Integer retriveEntityId(Integer interfaceMetricId) {
 		
-		String sql = "Select entity_id from interface_metrics " +
-					 "where id = ?";
+		String sql = "Select entity_id from interface_metrics " 
+		           + "Where id = ? "
+				   + "And project_type = 'CRAWLED'";
 		
 		Connection conn = ConnectionFactory.openConnection();
 		try {
 			
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, interfaceMetricId);
+			stmt.setInt(1, interfaceMetricId);
 			ResultSet rs = stmt.executeQuery();
 			Integer entityId = null;
 			if (rs.next()) {
@@ -55,17 +56,17 @@ public class InterfaceMetricsDao {
 	/**
 	 * Get information about one method
 	 * 
-	 * @param entityId Entity id
+	 * @param interfaceMetricsId
 	 * 
 	 * @return Method informations
 	 */
-	public EntityInfo getEntityInfo(String entityId) {
-		String sql = "Select project_name, fqn, params, return_type From interface_metrics where entity_id=?";
+	public EntityInfo getEntityInfo(Integer interfaceMetricsId) {
+		String sql = "Select project_name, fqn, params, return_type, project_type, entity_id From interface_metrics where id = ?";
 		
 		Connection conn = ConnectionFactory.openConnection();
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, entityId);
+			stmt.setInt(1, interfaceMetricsId);
 			
 			ResultSet rs = stmt.executeQuery();
 			
@@ -73,8 +74,10 @@ public class InterfaceMetricsDao {
 			if (rs.next()) {
 				entity.setProjectName(rs.getString("project_name"));
 				entity.fillClassAndMethod(rs.getString("fqn"));
-				entity.splitParams(rs.getString("params"));
+				entity.setParams(rs.getString("params"));
 				entity.setReturnType("return_type");
+				entity.setProjectType(rs.getString("project_type"));
+				entity.setEntityId(rs.getInt("entity_id"));
 			}
 			conn.close();
 			return entity;
@@ -92,17 +95,21 @@ public class InterfaceMetricsDao {
 	 * @param entityId Entity Id
 	 * @param errExec 0 - Indicates no error in execution
 	 *                1 - Indicates that method wasn't executed
-	 * @param result1 Result in first execution
-	 * @param result2 Result in second execution
-	 * @param result3 Result in third execution
+	 * @param results Array containing in each position the result of one execution
+	 * @param exec Array containing in each possition the syntaxe of one execution
 	 */
-	public void updateEntityExec(int entityId, int errExec, String result1, String result2, String result3) {
+	public void updateEntityExec(int entityId, int errExec, String[] results, String execs[]) {
 		
 		String sql = "Update interface_metrics "
 				   + "set error = ?, "
 				   + "result1 = ?, "
 				   + "result2 = ?, "
-				   + "result3 = ? "
+				   + "result3 = ?, "
+				   + "result4 = ?, "
+				   + "exec1 = ?, "
+				   + "exec2 = ?, "
+				   + "exec3 = ?, "
+				   + "exec4 = ? "
 			   	   + "where entity_id = ?";
 		
 		Connection conn = ConnectionFactory.openConnection();
@@ -111,10 +118,13 @@ public class InterfaceMetricsDao {
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, errExec);
-			stmt.setString(2, result1);
-			stmt.setString(3, result2);
-			stmt.setString(4, result3);
-			stmt.setInt(5, entityId);
+			for (int i = 0; i < results.length; i++)
+				stmt.setString(i + 2, results[i]);
+			
+			for (int i = 0; i < execs.length; i++)
+				stmt.setString(i + 6, execs[i]);
+
+			stmt.setInt(10, entityId);
 			
 			stmt.executeUpdate();
 			
@@ -140,7 +150,9 @@ public class InterfaceMetricsDao {
 	 */
 	public String[] getResults(int interfaceMetricsId) {
 
-		String sql = "Select error, result1, result2, result3 From interface_metrics where id=?";
+		String sql = "Select return_type, error, result1, result2, result3, result4, exec1, exec2, exec3, exec4 From interface_metrics "
+				   + "where id = ? "
+				   + "and error is not NULL";
 		
 		Connection conn = ConnectionFactory.openConnection();
 		try {
@@ -149,12 +161,19 @@ public class InterfaceMetricsDao {
 			
 			ResultSet rs = stmt.executeQuery();
 			
-			String[] results = new String[4];
+			String[] results = null;
 			if (rs.next()) {
-				results[0] = rs.getString("error");
-				results[1] = rs.getString("result1");
-				results[2] = rs.getString("result2");
-				results[3] = rs.getString("result3");
+				results = new String[10];
+				results[0] = rs.getString("return_type");
+				results[1] = rs.getString("error");
+				results[2] = rs.getString("result1");
+				results[3] = rs.getString("result2");
+				results[4] = rs.getString("result3");
+				results[5] = rs.getString("result4");
+				results[6] = rs.getString("exec1");
+				results[7] = rs.getString("exec2");
+				results[8] = rs.getString("exec3");
+				results[9] = rs.getString("exec4");
 			}
 			conn.close();
 			return results;
@@ -171,28 +190,39 @@ public class InterfaceMetricsDao {
 	 * Get a list of similar methods by interface
 	 * 
 	 * @param entityId Method id
+	 * @param typeCompare Tipo de comparação na busca
 	 * 
 	 * @return List with pair of id (entity_id and interface_metrics_id)
 	 */
-	public List<int[]> getSimilar(int entityId) {
+	public List<int[]> getSimilar(int entityId, String typeCompare) {
 
-		String sql = "SELECT interface_metrics_a, interface_metrics_b "
-				   + " FROM interface_metrics_pairs imp, interface_metrics im " 
-				   + "where im.entity_id = ? "
-				   + "and imp.interface_metrics_a = im.id "
-				   + "and imp.search_type = 'p1_c1_w1_t1'";
+//		String sql = "SELECT interface_metrics_a, interface_metrics_b "
+//				   + "FROM interface_metrics_pairs imp, interface_metrics im " 
+//				   + "where im.entity_id = ? "
+//				   + "and imp.interface_metrics_a = im.id "
+//				   + "and imp.search_type = ?";
+		
+		String sql = "Select interface_metrics_a, interface_metrics_b "
+				   + "From   interface_metrics_pairs p, interface_metrics a, interface_metrics b "
+				   + "Where  a.id = p.interface_metrics_a "
+				   + "And    b.id = p.interface_metrics_b "
+				   + "And    a.entity_id = ? "
+				   + "And    p.search_type = ? "
+				   + "And    a.error is not null "
+				   + "And    b.error is not null";		
 		
 		Connection conn = ConnectionFactory.openConnection();
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, entityId);
+			stmt.setString(2, typeCompare);
 			
 			ResultSet rs = stmt.executeQuery();
 			
 			List<int[]> list = new ArrayList<>();
-			int[] results = new int[2];
 			
-			if (rs.next()) {
+			while (rs.next()) {
+				int[] results = new int[2];
 				results[0] = rs.getInt("interface_metrics_a");
 				results[1] = rs.getInt("interface_metrics_b");
 				list.add(results);
@@ -205,6 +235,34 @@ public class InterfaceMetricsDao {
 		}
 		return null;
 
+	}
+
+
+	public Integer getErrorExecutedMethod(Integer entityId) {
+		
+		String sql = "Select error "
+				   + "From interface_metrics "
+				   + "where entity_id = ? ";
+		
+		Connection conn = ConnectionFactory.openConnection();
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, entityId);
+			
+			ResultSet rs = stmt.executeQuery();
+
+			Integer error = null;
+			if (rs.next()) {
+				error = rs.getInt("error");
+			}
+			conn.close();
+			return error;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
 	}
 	
 }
